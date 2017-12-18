@@ -504,6 +504,24 @@ class PypiConfig(BaseConfig):
     tag-format = %s
     """.strip().splitlines())
 
+    def sign_release(self):
+        """Return whether the release should be signed by twine.
+
+        Configure it in ~/.pypirc or setup.cfg using a
+        ``sign-release`` option::
+
+            [zest.releaser]
+            sign-release = yes
+
+        ``sign-release`` must contain exaclty one word which will be
+        converted to a boolean. Currently are accepted (case
+        insensitively): 0, false, no, off for False, and 1, true, yes,
+        on for True).
+
+        The default when this option has not been set is False.
+        """
+        return self._get_boolean('zest.releaser', 'sign-release', default=False)
+
     def tag_format(self, version):
         """Return the formatted tag that should be used in the release.
 

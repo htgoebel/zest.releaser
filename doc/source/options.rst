@@ -136,6 +136,13 @@ development-marker = a string
     This is the development marker.
     This is what gets appended to the version in postrelease.
 
+sign-release = yes / no
+    Default: no.
+    When set to true, twine is told to sign the release archives prior
+    to uploading them.
+    Note: When you enable it, everyone releasing the project is
+    required to have GPG signing set up correctly.
+
 tag-format = a string
     Default: ``{version}``
     This is a formatter that changes the name of the tag.

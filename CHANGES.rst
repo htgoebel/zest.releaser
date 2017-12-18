@@ -15,6 +15,8 @@ Changelog for zest.releaser
 - Calling twine in a more generic way to let it automatically do the right
   thing. This saves us a lot of code and lets twine do what it's good at.
   [htgoebel,reinout]
+- Add support for signing releases viw twine (option ``sign-release``).
+  [htgoebel]
 
 
 6.17.2 (2019-03-25)

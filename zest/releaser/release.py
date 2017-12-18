@@ -37,6 +37,7 @@ DATA.update({
     We then make sure you end up in the same relative directory after a
     checkout is done.''',
     'version': "Version we're releasing",
+    'sign-release': "Tell twine to sign the release archives.",
     'tag': "Tag we're releasing",
     'tag-message': "Commit message for the tag",
     'tag-signing': "Sign tag using gpg or pgp",
@@ -75,6 +76,7 @@ class Releaser(baserelease.Basereleaser):
             self.data['version'])
         self.data['tag-signing'] = self.pypiconfig.tag_signing()
         self.data['tag_already_exists'] = self.vcs.tag_exists(tag)
+        self.data['sign-release'] = self.pypiconfig.sign_release()
 
     def execute(self):
         """Do the actual releasing"""
@@ -182,6 +184,8 @@ class Releaser(baserelease.Basereleaser):
             pass
         elif twine_command == 'upload':
             twine_args += ('--skip-existing', )
+            if self.data['sign-release']:
+                twine_args += ('--sign', )
         else:
             print(Fore.RED + "Unknown twine command: %s" % twine_command)
             sys.exit(1)
